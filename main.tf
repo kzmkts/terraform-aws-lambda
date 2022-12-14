@@ -58,7 +58,10 @@ resource "aws_lambda_function" "lambda_function" {
 resource "aws_lambda_function_url" "lambda_function_url" {
   function_name      = aws_lambda_function.lambda_function.function_name
   # [AWS_IAM] または [NONE]
-  authorization_type = "NONE"
+  # curl https://xxxxxxxxxxxxxxxxx.on.aws/ \
+  # --aws-sigv4 "aws:amz:[region]:lambda" \
+  # --user "$(aws configure get aws_access_key_id):$(aws configure get aws_secret_access_key)"
+  authorization_type = "AWS_IAM"
 }
 
 # Cloudwatch
